@@ -71,18 +71,20 @@ public class PlayerGeneralListeners implements Listener {
 
     @EventHandler(priority = EventPriority.HIGH)
     public void onPlayerMove(PlayerMoveEvent event) {
-        if (event.isCancelled()) return;
-
-        Player player = event.getPlayer();
-        String name = player.getName();
-        if (plugin.getLoginManagement().isAuthenticated(name)) return;
-        
         Location from = event.getFrom();
         Location to = event.getTo();
-        if (to != null && from.getY() > to.getY()) return;
 
-        // Fix "too many packets" disconnect by using PlayerMoveEvent#setTo instead of Player#teleport
-        event.setTo(from);
+        if (to == null) {
+            return;
+        }
+
+        if (from.getX() == to.getX() && from.getY() == to.getY() && from.getZ() == to.getZ()) {
+            return;
+        }
+
+        if (!plugin.getLoginManagement().isAuthenticated(event.getPlayer().getName())) {
+            event.setCancelled(true);
+        }
     }
 
     @EventHandler(priority = EventPriority.HIGH)
