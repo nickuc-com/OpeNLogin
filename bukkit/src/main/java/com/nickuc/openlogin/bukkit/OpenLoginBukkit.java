@@ -88,14 +88,18 @@ public class OpenLoginBukkit extends JavaPlugin {
             return;
         }
 
-        String c = "§9";
-        sendMessage(c + "   ___                __  __             _ ");
-        sendMessage(c + "  /___\\_ __   ___  /\\ \\ \\/ /  ___   __ _(_)_ __");
-        sendMessage(c + " //  // '_ \\ / _ \\/  \\/ / /  / _ \\ / _` | | '_ \\");
-        sendMessage(c + "/ \\_//| |_) |  __/ /\\  / /__| (_) | (_| | | | | |");
-        sendMessage(c + "\\___/ | .__/ \\___\\_\\ \\/\\____/\\___/ \\__, |_|_| |_|");
-        sendMessage(c + "      |_|                          |___/         ");
-        sendMessage(c + "By: www.nickuc.com / github.com/nickuc-com/OpeNLogin - V " + getDescription().getVersion());
+        String c = "§9§l";
+        String c2 = "§b§l";
+        sendMessage(c + "    ___                __  __             _               " + c2 + "____  ");
+        sendMessage(c + "   /___\\_ __   ___  /\\ \\ \\/ /  ___   __ _(_)_ __   " + c2 + "/\\   /\\___ \\ ");
+        sendMessage(c + "  //  // '_ \\ / _ \\/  \\/ / /  / _ \\ / _` | | '_ \\  " + c2 + "\\ \\ / / __) |");
+        sendMessage(c + " / \\_//| |_) |  __/ /\\  / /__| (_) | (_| | | | | |  \\ " + c2 + " / / __/ ");
+        sendMessage(c + " \\___/ | .__/ \\___\\_\\ \\/\\____/\\___/ \\__, |_|_| |_|   " + c2 + "\\_/ |_____|");
+        sendMessage(c + "       |_|                          |___/                       ");
+        sendMessage(" §9www.nickuc.com §9§l/ §9github.com/nickuc-com/OpeNLogin - §bV " + getDescription().getVersion());
+        sendMessage("");
+        sendMessage("§4!! §cThis version is still under development and may contain bugs!");
+        sendMessage(" §eBugs & Suggestions: §fhttps://github.com/nickuc-com/OpeNLogin/issues/new");
         sendMessage("");
 
         Server server = getServer();
@@ -206,7 +210,7 @@ public class OpenLoginBukkit extends JavaPlugin {
     public void detectUpdates() {
         String tagName = null;
         try {
-            String result = HttpClient.DEFAULT.get("https://api.github.com/repos/nickuc/OpeNLogin/releases/latest");
+            String result = HttpClient.DEFAULT.get("https://api.github.com/repos/nickuc-com/OpeNLogin/releases/latest");
 
             // avoid use Google Gson to avoid problems with older versions.
             if (result.contains("\"tag_name\":\"")) {
@@ -216,9 +220,11 @@ public class OpenLoginBukkit extends JavaPlugin {
                 }
             }
         } catch (IOException exception) {
-            sendMessage("§cFailed to find new updates.");
+            sendMessage("§cFailed to find new updates: " + exception.getMessage());
             sendMessage("§cDownload the latest version at: https://github.com/nickuc-com/OpeNLogin/releases");
+            return;
         }
+
         if (tagName == null) {
             sendMessage("§cFailed to find new updates: invalid response.");
             sendMessage("§cDownload the latest version at: https://github.com/nickuc-com/OpeNLogin/releases");

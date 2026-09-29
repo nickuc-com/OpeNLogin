@@ -28,6 +28,7 @@ import com.nickuc.openlogin.bukkit.OpenLoginBukkit;
 import com.nickuc.openlogin.bukkit.command.BukkitCommand;
 import com.nickuc.openlogin.bukkit.ui.chat.ActionbarAPI;
 import com.nickuc.openlogin.bukkit.ui.title.TitleAPI;
+import com.nickuc.openlogin.bukkit.util.PluginChooserMessage;
 import com.nickuc.openlogin.common.http.HttpClient;
 import com.nickuc.openlogin.common.settings.Messages;
 import com.nickuc.openlogin.common.util.FileUtils;
@@ -102,17 +103,25 @@ public class OpenLoginCommand extends BukkitCommand {
                         return;
                     }
 
+                    Player player = (Player) sender;
+
                     if (!confirmOpenLogin.getAndSet(true)) {
                         sender.sendMessage("");
-                        sender.sendMessage(" §cnLogin is generally a better solution for most users.");
-                        sender.sendMessage(" §7If you want to install §fOpeNLogin §7anyway,");
-                        sender.sendMessage(" §7please click on the message again.");
+                        sender.sendMessage(" §4!! §cOpenLogin is still under development.");
+                        sender.sendMessage("");
+                        sender.sendMessage("   §eBugs can occur and should be reported.");
+                        sender.sendMessage("   §fgithub.com/nickuc-com/OpeNLogin/issues/new");
+                        sender.sendMessage("");
+                        sender.sendMessage(" §a✔ §7If you have read the warning and wish to proceed,");
+                        sender.sendMessage("   §7please click §fOpeNLogin §7on the message again.");
+                        sender.sendMessage("");
+                        PluginChooserMessage.sendPluginChooserMessage(player);
                         sender.sendMessage("");
                         return;
                     }
 
                     for (Player on : plugin.getServer().getOnlinePlayers()) {
-                        plugin.getFoliaLib().runAtEntity(on, task -> on.kickPlayer("§aPlease rejoin to complete the plugin installation."));
+                        plugin.getFoliaLib().runAtEntity(on, task -> on.kickPlayer("§a✔ Please rejoin to complete the plugin installation."));
                     }
 
                     plugin.setNewUser(false);

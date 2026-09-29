@@ -40,24 +40,31 @@ public class PlayerAuthenticateListener implements Listener {
     @EventHandler
     public void onAsyncAuthenticate(AsyncAuthenticateEvent event) {
         Player player = event.getPlayer();
-        if (!player.hasPermission("openlogin.admin")) return;
 
         if (welcomeMessage) {
             player.sendMessage("");
-            player.sendMessage(" §eWelcome to OpeNLogin!");
+            player.sendMessage(" §aWelcome to OpeNLogin!");
             player.sendMessage("");
-            player.sendMessage(" §7Documentation:");
-            player.sendMessage(" §bhttps://github.com/nickuc/OpeNLogin/tree/master/docs");
+            player.sendMessage("  §7Documentation:");
+            player.sendMessage("   §8* §fhttps://github.com/nickuc/OpeNLogin/tree/master/docs");
+            player.sendMessage("   §8* §fhttps://docs.nickuc.com");
             player.sendMessage("");
-            player.sendMessage(" §7If you need help, fell free to contact our support:");
-            player.sendMessage(" §bhttps://www.nickuc.com/discord");
+            player.sendMessage(" §a✔ §6If you need help, fell free to contact our support :)");
+            player.sendMessage("   §bhttps://www.nickuc.com/discord");
             player.sendMessage("");
             welcomeMessage = false;
-        } else if (plugin.isUpdateAvailable()) {
-            player.sendMessage("");
-            player.sendMessage(" §7A new version of §aOpeNLogin §7is available §a(v" + plugin.getDescription().getVersion() + " -> " + plugin.getLatestVersion() + ")§7.");
-            player.sendMessage(" §7Use the command §f'/openlogin update' §7to download new version.");
-            player.sendMessage("");
+            return;
+        }
+
+        if (player.hasPermission("openlogin.admin")) {
+
+            // Display if there is an available update
+            if (plugin.isUpdateAvailable()) {
+                player.sendMessage("");
+                player.sendMessage(" §7A new version of §aOpeNLogin §7is available §a(v" + plugin.getDescription().getVersion() + " -> " + plugin.getLatestVersion() + ")§7.");
+                player.sendMessage(" §7Use the command §f\"/openlogin update\" §7to download new version.");
+                player.sendMessage("");
+            }
         }
     }
 }

@@ -27,10 +27,9 @@ package com.nickuc.openlogin.bukkit.listener;
 import com.nickuc.openlogin.bukkit.OpenLoginBukkit;
 import com.nickuc.openlogin.bukkit.task.LoginQueue;
 import com.nickuc.openlogin.bukkit.ui.title.TitleAPI;
-import com.nickuc.openlogin.bukkit.util.TextComponentMessage;
+import com.nickuc.openlogin.bukkit.util.PluginChooserMessage;
 import com.nickuc.openlogin.common.model.Title;
 import com.nickuc.openlogin.common.settings.Messages;
-import com.nickuc.openlogin.common.util.ClassUtils;
 import lombok.AllArgsConstructor;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -55,20 +54,12 @@ public class PlayerJoinListeners implements Listener {
                 }
 
                 player.sendMessage("");
-                player.sendMessage(" §eHello, " + player.getName() + "!");
+                player.sendMessage(" §aHello, " + player.getName() + "!");
                 player.sendMessage("");
                 player.sendMessage("  §7Before we start, please select");
                 player.sendMessage("  §7your favorite login plugin.");
                 player.sendMessage("");
-                if (ClassUtils.exists("net.md_5.bungee.api.chat.TextComponent")) {
-                    TextComponentMessage.sendPluginChoice(player);
-                } else {
-                    player.sendMessage("      §enLogin              §eOpeNLogin");
-                    player.sendMessage("  §6(proprietary)      §b(open source)");
-                    player.sendMessage("");
-                    player.sendMessage(" §7To use nLogin, type: §f'/openlogin nlogin'");
-                    player.sendMessage(" §7To use OpeNLogin, type: §f'/openlogin setup'");
-                }
+                PluginChooserMessage.sendPluginChooserMessage(player);
                 player.sendMessage("");
 
                 TitleAPI.getApi().send(player,
