@@ -3,7 +3,7 @@ subprojects {
     apply plugin: 'java'
 
     group = 'com.nickuc.openlogin'
-    version = '1.6.7'
+    version = '2.0.0-alpha.0'
 
     java {
         toolchain {
